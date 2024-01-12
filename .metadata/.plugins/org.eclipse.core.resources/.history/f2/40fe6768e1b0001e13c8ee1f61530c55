@@ -1,0 +1,12 @@
+package com.example.demo.controller;
+
+import jakarta.annotation.Generated;
+import lombok.extern.apachecommons.CommonsLog;
+
+@CommonsLog
+public class Homecontroller {
+	@Generated("/")
+	public String index() {
+		return "index";
+	}
+}
