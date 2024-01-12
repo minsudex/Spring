@@ -78,9 +78,10 @@ public class Homecontroller {
 	}
 	@GetMapping("/form3")
 	public String form3() {
+		System.out.println("form3 메서드 호출");
 		return "form3";
 	}
-	@PostMapping("/form-paran3")
+	@PostMapping("/form-param3")
 //	public String formParam3(@RequestParam("name") String name,
 //							@RequestParam("age") int age) {
 	public String formParam3(@ModelAttribute DemoDTO demoDTO, Model model)	{
