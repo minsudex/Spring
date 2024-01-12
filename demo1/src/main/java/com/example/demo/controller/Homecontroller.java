@@ -1,9 +1,13 @@
 package com.example.demo.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.example.demo.dto.DemoDTO;
 
 
 // @Controller: 해당 클래스를 컨트롤러 클래스로 스프링빈에 등록
@@ -54,5 +58,36 @@ public class Homecontroller {
 		System.out.println("p2 = " + p2);
 		return "index";	
 	}
-
+	@GetMapping("/model1")
+	public String model1(Model Model) {
+		String str1 = "오늘은 금요일";
+		// 화면에 가져갈 데이터를 담음
+		Model.addAttribute("s1",str1);
+		return "model1";
+		
+	}@GetMapping("/form2")
+	public String form2() {
+		System.out.println("form2 메서드 호출");
+		return "form2";
+	}
+	
+	@PostMapping("/form-param2")
+	public String formParam2(@RequestParam("n1") String n1,Model model) {
+		model.addAttribute("n1",n1);
+		return "model2";
+	}
+	@GetMapping("/form3")
+	public String form3() {
+		return "form3";
+	}
+	@PostMapping("/form-paran3")
+//	public String formParam3(@RequestParam("name") String name,
+//							@RequestParam("age") int age) {
+	public String formParam3(@ModelAttribute DemoDTO demoDTO, Model model)	{
+//		System.out.println("name = " + name + ", age = " + age);
+		System.out.println(demoDTO);
+		model.addAttribute("demo", demoDTO);
+		return "model3";
+	}
 }
+		
