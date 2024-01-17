@@ -3,34 +3,57 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+	table, tr, td, th {
+		border: 1px solid black;
+		border-collapse: collapse;
+	}
+</style>
 </head>
 <body>
 	<h2>도서 목록</h2>
+	<a href="/">시작화면</a>
 	<table>
 		<tr>
-			<th>도서번호</th>
+			<th>번호</th>
 			<th>도서명</th>
 			<th>저자</th>
 			<th>출판사</th>
 			<th>가격</th>
+			<th>조회</th>
+			<th>삭제</th>
+			<th>수정</th>
 		</tr>
-		<tr th:each="book : ${bookList}">
+		<tr th:each="book: ${bookList}">
+			<td th:text="${book.id}"></td>
 			<td>
-				<a th:href="@{|/book/${book.id}|}" th:text="${book.id}"></a>
+				<a th:href="@{|/book/${book.id}|}" th:text="${book.bookName}"></a>
 			</td>
-			<td th:text="${book.bookName}"></td>
 			<td th:text="${book.bookAuthor}"></td>
 			<td th:text="${book.bookPublisher}"></td>
 			<td th:text="${book.bookPrice}"></td>
 			<td>
 				<button th:onclick="detail([[${book.id}]])">조회</button>
 			</td>
+			<td>
+				<button th:onclick="delete_fn([[${book.id}]])">삭제</button>
+			</td>
+			<td>
+				<button th:onclick="update_fn([[${book.id}]])">수정</button>
+			</td>
 		</tr>
 	</table>
 </body>
 <script th:inline="javascript">
 	const detail = (id) => {
+		console.log("클릭한 id", id);		
 		location.href = `/book/${id}`;
+	}
+	const delete_fn = (id) => {
+		location.href = `/book/delete/${id}`;
+	}
+	const update_fn = (id) => {
+		location.href = `/book/update/${id}`;
 	}
 </script>
 </html>

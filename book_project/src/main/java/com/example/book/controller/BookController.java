@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.book.dto.BookDTO;
 import com.example.book.service.BookService;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Controller
 public class BookController {
@@ -49,4 +51,24 @@ public class BookController {
 		return "detail";
 	}
 	
+	@GetMapping("/book/delete/{id}")
+	public String delete(@PathVariable("id") Long id) {
+		bookService.delete(id);
+		// 삭제가 끝난 뒤 목록 출력 
+		return "redirect:/list";
+	}
+	@GetMapping("/book/update/{id}")
+	public String update(@PathVariable("id") Long id, Model model) {
+		BookDTO bookDTO = bookService.findById(id);
+		model.addAttribute("book", bookDTO);
+		return "update";
+	}
+	
+	@PostMapping("/update")
+	public String update(BookDTO bookDTO) {
+		System.out.println("BookDTO = " + bookDTO);
+		bookService.update(bookDTO);
+		return "redirect:/list";
+	}
+		
 }
