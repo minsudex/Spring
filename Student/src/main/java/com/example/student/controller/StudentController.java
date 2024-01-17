@@ -50,4 +50,5 @@ public class StudentController {
 		model.addAttribute("student", studentDTO);
 		return "detail";
 	}
+	
 }
